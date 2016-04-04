@@ -1,0 +1,40 @@
+<html>
+<head>
+  <title>Promises</title>
+  <meta charset="UTF-8">
+  <script data-main="js/index" src="bower_components/requirejs/require.js"></script>
+  <style>
+    li[goto]{
+      cursor: pointer;
+    }
+    li[goto]:hover{
+      text-decoration: underline;
+    }
+    p{
+      font-weight: bolder;
+      background-color: black
+    }
+    p.error{
+      color: red;
+    }
+    p.warn{
+      color: orange;
+    }
+    p.info{
+      color: lime;
+    }
+    pre{
+      font-weight: bolder;
+    }
+
+  </style>
+<head>
+<body>
+<h1>Promesas</h1>
+<ul>
+  <li goto="0">Qué es una promesa</li>
+  <li goto="1">Cómo convertir una función en promesa</li>
+</ul>
+<div id="exampleContainer"></div>
+</body>
+</html>

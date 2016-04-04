@@ -1,0 +1,24 @@
+{
+  "name": "bluebird promises example",
+  "description": "Some examples using bluebird promises library to explain the behaviour of promises",
+  "main": [
+    "index.js"
+  ],
+  "dependencies": {
+    "bluebird": "3.3.4",
+    "jquery": "2.2.2",
+    "requirejs": "2.2.0"
+  },
+  "moduleType": [
+    "amd"
+  ],
+  "authors": [
+    "Angel Fernández Camba <noodle71@gmail.com>"
+  ],
+  "license": "WTFPL",
+  "ignore": [
+    "node_modules",
+    "bower_components"
+  ],
+  "private": true
+}

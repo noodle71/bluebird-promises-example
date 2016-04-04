@@ -1,0 +1,24 @@
+{
+  "name": "bluebird-promises-example",
+  "version": "1.0.0",
+  "description": "Some examples using bluebird promises library to explain the behaviour of promises",
+  "devDependencies": {
+    "bower": "*"
+  },
+  "scripts":{
+    "preinstall":"bower install"
+  },
+  "keywords": [
+    "bluebird",
+    "promises"
+  ],
+  "repository": {
+    "url": "git+ssh://git@github.com/noodle71/bluebird-promises-example.git",
+    "type": "git"
+  },
+  "author": "noodle71",
+  "maintainers": [
+    "Angel Fernández Camba <noodle71@gmail.com>"
+  ],
+  "license": "WTFPL"
+}
