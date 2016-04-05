@@ -12,10 +12,10 @@ define(['jquery', 'bluebird', 'http', 'dom'], function ($, Promise, http, dom) {
   }
 
   function test(){
-    var postsURL = http.HOST + http.POSTS;
-    var usersURL = http.HOST + http.USERS;
-    var albumsURL = http.HOST + http.ALBUMS;
-    var invalidUrl = http.HOST + '/invalidUrl';
+    var postsURL = http.POSTS;
+    var usersURL = http.USERS;
+    var albumsURL = http.ALBUMS;
+    var invalidUrl = '/invalidUrl';
 
     useCallbacksChaining(postsURL, usersURL, albumsURL);
     usePromisesChaining(postsURL, usersURL, albumsURL);
@@ -27,25 +27,15 @@ define(['jquery', 'bluebird', 'http', 'dom'], function ($, Promise, http, dom) {
     usePromisesChaining(postsURL, usersURL, invalidUrl);
   }
 
-  function getUsingPromises(url){
-    return Promise.resolve($.get(url));
-  }
-
-  function getUsingCallbacks(url, cb){
-    return $.get(url, cb).fail(function(error){
-      throw new Error('Callbacks: Error');
-    });
-  }
-
   function usePromisesChaining(postsURL, usersURL, albumsURL){
-    getUsingPromises(postsURL)
+    http.getUsingPromises(postsURL)
       .then(function(data){
         dom.info('Promises: Got Posts: ' + typeof data);
-        return getUsingPromises(usersURL)
+        return http.getUsingPromises(usersURL)
       })
       .then(function(data){
         dom.info('Promises: Got Users: ' + typeof data);
-        return getUsingPromises(albumsURL);
+        return http.getUsingPromises(albumsURL);
       })
       .then(function(data){
         dom.info('Promises: Got Albums: ' + typeof data);
@@ -58,11 +48,11 @@ define(['jquery', 'bluebird', 'http', 'dom'], function ($, Promise, http, dom) {
 
   function useCallbacksChaining(postsURL, usersURL, albumsURL){
     try{
-      getUsingCallbacks(postsURL, function(data){
+      http.getUsingCallbacksThrowingError(postsURL, function(data){
         dom.info('Callbacks: Got Posts: ' + typeof data);
-        getUsingCallbacks(usersURL, function(data){
+        http.getUsingCallbacksThrowingError(usersURL, function(data){
           dom.info('Callbacks: Got Users: ' + typeof data);
-          getUsingCallbacks(albumsURL, function(data){
+          http.getUsingCallbacksThrowingError(albumsURL, function(data){
             dom.info('Callbacks: Got Albums: ' + typeof data);
           });
         });
@@ -78,8 +68,8 @@ define(['jquery', 'bluebird', 'http', 'dom'], function ($, Promise, http, dom) {
     dom.append(test.toString());
     dom.append(useCallbacksChaining.toString());
     dom.append(usePromisesChaining.toString());
-    dom.append(getUsingCallbacks.toString());
-    dom.append(getUsingPromises.toString());
+    dom.append(http.getUsingCallbacksThrowingError.toString());
+    dom.append(http.getUsingPromises.toString());
   }
 
   return {

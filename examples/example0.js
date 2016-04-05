@@ -17,14 +17,14 @@ define(['jquery', 'bluebird', 'http', 'dom'], function ($, Promise, http, dom) {
   }
 
   function getFromServer(url){
-    http.get(url).then(dom.info).catch(dom.error);
+    http.promiseGetUsingXMLHttpRequest(url).then(dom.info).catch(dom.error);
   }
 
   function renderText(){
     dom.button('sendRequests', sendRequests);
     dom.append(sendRequests.toString());
     dom.append(getFromServer.toString());
-    dom.append(http.get.toString());
+    dom.append(http.promiseGetUsingXMLHttpRequest.toString());
   }
 
   return {
