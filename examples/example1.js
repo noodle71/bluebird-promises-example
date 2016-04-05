@@ -7,18 +7,8 @@ requirejs.config({
 
 define(['jquery', 'bluebird', 'http', 'dom'], function ($, Promise, http, dom) {
 
-  function renderText(){
-    dom.append(castJqueryPromise.toString());
-    dom.append("//BONUS:");
-    dom.append(testPromises.toString());
-    dom.append(usePromiseReject.toString());
-    dom.append(usePromiseResolve.toString());
-    dom.append(usePromiseConstructor.toString());
-  }
-
   function init(){
     renderText();
-    testPromises();
   }
 
   function testPromises(){
@@ -53,6 +43,16 @@ define(['jquery', 'bluebird', 'http', 'dom'], function ($, Promise, http, dom) {
 
   function castJqueryPromise(url){
     return Promise.resolve($.get(url));
+  }
+
+  function renderText(){
+    dom.button('testPromises', testPromises);
+    dom.append(castJqueryPromise.toString());
+    dom.append("//BONUS:");
+    dom.append(testPromises.toString());
+    dom.append(usePromiseReject.toString());
+    dom.append(usePromiseResolve.toString());
+    dom.append(usePromiseConstructor.toString());
   }
 
   return {

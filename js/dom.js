@@ -9,6 +9,7 @@ define(['jquery'], function ($) {
   var $container = $('#exampleContainer');
   var $logger = $('<div>', {'id': 'logger'});
 
+
   function getContainer(){
     return $container;
   }
@@ -17,13 +18,22 @@ define(['jquery'], function ($) {
     return $logger;
   }
 
+  function button(text, fun){
+    var actionButton = $('<button>',{'text':text});
+    actionButton.off('click');
+    actionButton.on('click', fun);
+    $container.append(actionButton);
+  }
+
   function append(text){
-    $container.prepend($('<pre>',{'text': text}));
+    var code = $('<pre>', {'text': text});
+    $container.prepend(code);
   }
 
   function log(text, level){
     console[level](text);
     $logger.append($('<p>',{'text': text, 'class': level}));
+    window.scrollTo(0, document.body.scrollHeight);
   }
 
   function info(text){
@@ -41,6 +51,7 @@ define(['jquery'], function ($) {
   function startContainer(){
     $container.empty();
     $logger.empty();
+    console.clear();
     $container.append($logger);
   }
 
@@ -51,6 +62,7 @@ define(['jquery'], function ($) {
     'error': error,
     'getContainer': getContainer,
     'getLogger': getLogger,
-    'append': append
+    'append': append,
+    'button': button
   };
 });
