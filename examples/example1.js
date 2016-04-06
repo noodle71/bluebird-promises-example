@@ -17,7 +17,7 @@ define(['jquery', 'bluebird', 'http', 'dom'], function ($, Promise, http, dom) {
     usePromiseResolve().then(dom.info).catch(dom.error);
     usePromiseReject().then(dom.info).catch(dom.error);
     castJqueryPromise(http.POSTS).then(dom.info).catch(dom.error);
-    castJqueryPromise('this is a invalid Url').then(dom.info).catch(dom.error);
+    castJqueryPromise(http.INVALID_URL).then(dom.info).catch(dom.error);
   }
 
   function usePromiseConstructor(success){

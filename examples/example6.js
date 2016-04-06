@@ -13,7 +13,7 @@ define(['jquery', 'bluebird', 'http', 'dom'], function ($, Promise, http, dom) {
 
   function test(){
     var postsURL = http.POSTS;
-    var invalidUrl = '/invalidUrl';
+    var invalidUrl = http.INVALID_URL;
 
     var promiseOk = http.getUsingPromises(postsURL);
     var promiseFail = http.getUsingPromises(invalidUrl);

@@ -15,7 +15,7 @@ define(['jquery', 'bluebird', 'http', 'dom'], function ($, Promise, http, dom) {
     var postsURL = http.POSTS;
     var usersURL = http.USERS;
     var albumsURL = http.ALBUMS;
-    var invalidUrl = '/invalidUrl';
+    var invalidUrl = http.INVALID_URL;
 
     useCallbacksParallel([postsURL, usersURL, albumsURL]);
     usePromisesParallel([postsURL, usersURL, albumsURL]);

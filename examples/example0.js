@@ -13,7 +13,7 @@ define(['jquery', 'bluebird', 'http', 'dom'], function ($, Promise, http, dom) {
 
   function sendRequests(){
     getFromServer(http.POSTS);
-    getFromServer('/esta url no existe');
+    getFromServer(http.INVALID_URL);
   }
 
   function getFromServer(url){

@@ -17,6 +17,7 @@ define(['jquery', 'bluebird', 'dom'], function ($, Promise, dom) {
   var POST_BY_USER_ID = POSTS + '?userId=';
   var TODOS_BY_USER_ID = TODOS + '?userId=';
   var USER_BY_USER_ID = USERS + '?id=';
+  var INVALID_URL = '/invalidUrl';
 
 
   function promiseGetUsingXMLHttpRequest(url){
@@ -71,6 +72,7 @@ define(['jquery', 'bluebird', 'dom'], function ($, Promise, dom) {
     'USERS': USERS,
     'POST_BY_USER_ID': POST_BY_USER_ID,
     'TODOS_BY_USER_ID': TODOS_BY_USER_ID,
-    'USER_BY_USER_ID': USER_BY_USER_ID
+    'USER_BY_USER_ID': USER_BY_USER_ID,
+    'INVALID_URL': INVALID_URL
   };
 });
