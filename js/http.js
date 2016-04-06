@@ -5,7 +5,7 @@ requirejs.config({
     }
 });
 
-define(['jquery', 'bluebird'], function ($, Promise) {
+define(['jquery', 'bluebird', 'dom'], function ($, Promise, dom) {
 
   var HOST = 'http://jsonplaceholder.typicode.com';
   var POSTS = HOST + '/posts';
@@ -14,6 +14,10 @@ define(['jquery', 'bluebird'], function ($, Promise) {
   var PHOTOS = HOST + '/photos';
   var TODOS = HOST + '/todos';
   var USERS = HOST + '/users';
+  var POST_BY_USER_ID = POSTS + '?userId=';
+  var TODOS_BY_USER_ID = TODOS + '?userId=';
+  var USER_BY_USER_ID = USERS + '?id=';
+
 
   function promiseGetUsingXMLHttpRequest(url){
     return new Promise(function (resolve, reject) {
@@ -64,6 +68,9 @@ define(['jquery', 'bluebird'], function ($, Promise) {
     'ALBUMS': ALBUMS,
     'PHOTOS': PHOTOS,
     'TODOS': TODOS,
-    'USERS': USERS
+    'USERS': USERS,
+    'POST_BY_USER_ID': POST_BY_USER_ID,
+    'TODOS_BY_USER_ID': TODOS_BY_USER_ID,
+    'USER_BY_USER_ID': USER_BY_USER_ID
   };
 });

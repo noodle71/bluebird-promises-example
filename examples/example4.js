@@ -28,7 +28,9 @@ define(['jquery', 'bluebird', 'http', 'dom'], function ($, Promise, http, dom) {
   }
 
   function usePromisesParallel(urls){
-    var joinPromises = urls.map(function(url){return http.getUsingPromises(url)});
+    var joinPromises = urls.map(function(url){
+      return http.getUsingPromises(url);
+    });
     Promise.all(joinPromises)
       .then(function(data){
         dom.info('Promises: Got Everything: ' + typeof data);
