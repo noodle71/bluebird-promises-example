@@ -16,29 +16,12 @@ define(['jquery', 'bluebird', 'http', 'dom'], function ($, Promise, http, dom) {
   }
 
   function test(){
-    http.getUsingPromises(http.POSTS)
-      .then(function(){
-        return Promise.all([
-          http.getUsingPromises(http.USERS),
-          http.getUsingPromises(http.TODOS)
-        ]);
-      })
-      .spread(function(users, todos){
+    var urls = [http.POSTS, http.USERS, http.TODOS];
+    Promise.map(urls, function(url){return http.getUsingPromises(url)})
+      .spread(function(posts, users, todos){
+        dom.info('Received posts: ' + posts.length);
         dom.info('Received users: ' + users.length);
         dom.info('Received todos: ' + todos.length);
-      })
-      .catch(dom.error);
-
-    http.getUsingPromises(http.POSTS)
-      .then(function(){
-        return Promise.all([
-          http.getUsingPromises(http.USERS),
-          http.getUsingPromises(http.TODOS)
-        ]);
-      })
-      .then(function(all){
-        dom.info('Received users: ' + all[0].length);
-        dom.info('Received todos: ' + all[1].length);
       })
       .catch(dom.error);
   }

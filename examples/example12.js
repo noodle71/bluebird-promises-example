@@ -16,18 +16,22 @@ define(['jquery', 'bluebird', 'http', 'dom'], function ($, Promise, http, dom) {
   }
 
   function test(){
-    var urls = {
-      'posts': http.getUsingPromises(http.POSTS),
-      'users': http.getUsingPromises(http.USERS),
-      'todos': http.getUsingPromises(http.TODOS)
-    };
-    Promise.props(urls)
-      .then(function(result){
-        dom.info('Received posts: ' + result.posts.length);
-        dom.info('Received users: ' + result.users.length);
-        dom.info('Received todos: ' + result.todos.length);
+    var getUrls = [
+      http.getUsingPromises(http.POSTS),
+      http.getUsingPromises(http.USERS),
+      http.getUsingPromises(http.TODOS)
+    ];
+    //Promise is fullfilled when 2 are fulfilled
+    Promise.some(getUrls, 2)
+      .spread(function(first, second, third){
+        dom.info('first: ' + first.length);
+        dom.info('second: ' + second.length);
+        dom.info('third: ' + third);
       })
-      .catch(dom.error);
+      .catch(Promise.AggregateError, function(error) {
+        //Can't have two promises fulfilled
+        dom.error(error);
+    });
   }
 
   function renderText(){

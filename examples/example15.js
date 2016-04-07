@@ -16,18 +16,18 @@ define(['jquery', 'bluebird', 'http', 'dom'], function ($, Promise, http, dom) {
   }
 
   function test(){
-    var urls = {
-      'posts': http.getUsingPromises(http.POSTS),
-      'users': http.getUsingPromises(http.USERS),
-      'todos': http.getUsingPromises(http.TODOS)
-    };
-    Promise.props(urls)
-      .then(function(result){
-        dom.info('Received posts: ' + result.posts.length);
-        dom.info('Received users: ' + result.users.length);
-        dom.info('Received todos: ' + result.todos.length);
-      })
-      .catch(dom.error);
+    var urls = [http.POSTS, http.USERS, http.TODOS];
+
+    Promise.reduce(urls, function(total, url) {
+      return http.getUsingPromises(url, "utf8")
+        .then(function(contents) {
+          return total.concat(contents);
+        });
+      },[])
+    .then(function(total) {
+      dom.info('Received: ' + total.length);
+    })
+    .catch(dom.error);
   }
 
   function renderText(){
